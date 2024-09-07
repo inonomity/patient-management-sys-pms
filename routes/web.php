@@ -63,6 +63,9 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
         'as'   => '{username}',
         'uses' => 'App\Http\Controllers\ProfilesController@show',
     ]);
+    Route::get('booking', [
+        'uses' => 'App\Http\Controllers\BookingController@show',
+    ]);
 });
 
 // Registered, activated, and is current user routes.

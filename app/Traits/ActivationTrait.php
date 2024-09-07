@@ -15,15 +15,15 @@ trait ActivationTrait
      * @param  User  $user
      * @return void
      */
-    public function initiateEmailActivation(User $user)
-    {
-        if (! config('settings.activation') || ! $this->validateEmail($user)) {
-            return true;
-        }
+    // public function initiateEmailActivation(User $user)
+    // {
+    //     if (! config('settings.activation') || ! $this->validateEmail($user)) {
+    //         return true;
+    //     }
 
-        $activationRepostory = new ActivationRepository();
-        $activationRepostory->createTokenAndSendEmail($user);
-    }
+    //     $activationRepostory = new ActivationRepository();
+    //     $activationRepostory->createTokenAndSendEmail($user);
+    // }
 
     /**
      * Validate the Users Email.

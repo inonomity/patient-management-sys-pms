@@ -34,10 +34,10 @@ class ActivationRepository
         }
 
         // Create new Activation record for this user
-        $activation = self::createNewActivationToken($user);
+        // $activation = self::createNewActivationToken($user);
 
-        // Send activation email notification
-        self::sendNewActivationEmail($user, $activation->token);
+        // // Send activation email notification
+        // self::sendNewActivationEmail($user, $activation->token);
     }
 
     /**
@@ -64,10 +64,10 @@ class ActivationRepository
      * @param  \App\Models\User  $user  The user
      * @param  string  $token  The token
      */
-    public function sendNewActivationEmail(User $user, $token)
-    {
-        $user->notify(new SendActivationEmail($token));
-    }
+    // public function sendNewActivationEmail(User $user, $token)
+    // {
+    //     $user->notify(new SendActivationEmail($token));
+    // }
 
     /**
      * Method to removed expired activations.

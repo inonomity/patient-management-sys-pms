@@ -122,7 +122,7 @@ class ActivateController extends Controller
 
         $data = [
             'email' => $user->email,
-            'date'  => $lastActivation->created_at->format('m/d/Y'),
+            'date' => now(),
         ];
 
         return view($this->getActivationView())->with($data);
@@ -140,28 +140,28 @@ class ActivateController extends Controller
         $currentRoute = Route::currentRouteName();
 
         $rCheck = $this->activeRedirect($user, $currentRoute);
-        if ($rCheck) {
-            return $rCheck;
-        }
+        // if ($rCheck) {
+        //     return $rCheck;
+        // }
 
-        if ($user->activated === false) {
-            $activationsCount = Activation::where('user_id', $user->id)
-                ->where('created_at', '>=', Carbon::now()->subHours(config('settings.timePeriod')))
-                ->count();
+        // if ($user->activated === false) {
+        //     $activationsCount = Activation::where('user_id', $user->id)
+        //         ->where('created_at', '>=', Carbon::now()->subHours(config('settings.timePeriod')))
+        //         ->count();
 
-            if ($activationsCount > config('settings.maxAttempts')) {
-                Log::info('Exceded max resends in last '.config('settings.timePeriod').' hours. '.$currentRoute.'. ', [$user]);
+        //     if ($activationsCount > config('settings.maxAttempts')) {
+        //         Log::info('Exceded max resends in last '.config('settings.timePeriod').' hours. '.$currentRoute.'. ', [$user]);
 
-                $data = [
-                    'email' => $user->email,
-                    'hours' => config('settings.timePeriod'),
-                ];
+        //         $data = [
+        //             'email' => $user->email,
+        //             'hours' => config('settings.timePeriod'),
+        //         ];
 
-                return view('auth.exceeded')->with($data);
-            }
-        }
+        //         return view('auth.exceeded')->with($data);
+        //     }
+        // }
 
-        Log::info('Registered attempted to navigate while unactivate. '.$currentRoute.'. ', [$user]);
+        // Log::info('Registered attempted to navigate while unactivate. '.$currentRoute.'. ', [$user]);
 
         $data = [
             'email' => $user->email,
@@ -252,7 +252,7 @@ class ActivateController extends Controller
                 return view('auth.exceeded')->with($data);
             }
 
-            $sendEmail = $this->initiateEmailActivation($user);
+            // $sendEmail = $this->initiateEmailActivation($user);
 
             Log::info('Activation resent to registered user. '.$currentRoute.'. ', [$user]);
 
